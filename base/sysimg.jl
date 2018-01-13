@@ -462,12 +462,6 @@ include("asyncmap.jl")
 include("multimedia.jl")
 using .Multimedia
 
-# frontend
-include("repl/Terminals.jl")
-include("repl/LineEdit.jl")
-include("repl/REPLCompletions.jl")
-include("repl/REPL.jl")
-
 # deprecated functions
 include("deprecated.jl")
 
@@ -523,6 +517,7 @@ Base.require(:SparseArrays)
 Base.require(:SuiteSparse)
 Base.require(:Test)
 Base.require(:Unicode)
+Base.require(:REPL)
 
 @eval Base begin
     @deprecate_binding Test root_module(:Test) true ", run `using Test` instead"
@@ -548,6 +543,12 @@ Base.require(:Unicode)
 
     # PR #25571
     @deprecate_binding LinAlg root_module(:LinearAlgebra) true ", run `using LinearAlgebra` instead"
+
+    # PR 25544
+    @deprecate_binding REPL            root_module(:REPL)                 true ", run `using REPL` instead"
+    @deprecate_binding LineEdit        root_module(:REPL).LineEdit        true ", use `REPL.LineEdit` instead"
+    @deprecate_binding REPLCompletions root_module(:REPL).REPLCompletions true ", use `REPL.REPLCompletions` instead"
+    @deprecate_binding Terminals       root_module(:REPL).Terminals       true ", use `REPL.Terminals` instead"
 end
 
 empty!(LOAD_PATH)
