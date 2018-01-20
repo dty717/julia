@@ -1588,7 +1588,7 @@ end
 @deprecate gc_enable GC.enable
 @eval @deprecate $(Symbol("@gc_preserve")) GC.$(Symbol("@preserve")) false
 
-@deprecate nb_available bytesavailable
+@deprecate nb_available nbytesavailable
 
 # issue #9053
 if Sys.iswindows()
